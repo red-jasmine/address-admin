@@ -1,0 +1,45 @@
+{
+    "name": "red-jasmine/address-admin",
+    "description": ":package_description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "liushoukun",
+            "email": "liushoukun66@gmail.com",
+            "homepage": "https://github.com/liushoukun66"
+        }
+    ],
+    "homepage": "https://github.com/red-jasmine/address-admin",
+    "keywords": ["Laravel", "AddressAdmin"],
+    "require": {
+        "red-jasmine/support": "1.0.x-dev",
+        "red-jasmine/address": "1.0.x-dev"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "RedJasmine\\AddressAdmin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RedJasmine\\AddressAdmin\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RedJasmine\\AddressAdmin\\AddressAdminServiceProvider"
+            ],
+            "aliases": {
+                "AddressAdmin": "RedJasmine\\AddressAdmin\\Facades\\AddressAdmin"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
+        }
+    }
+}
