@@ -11,6 +11,7 @@ Route::group([
                  'middleware' => config('admin.route.middleware'),
              ], function (Router $router) {
 
+    $router->get('api/region/children', 'AddressController@children')->name('address-admin.api.region.children');
     $router->resource('address', 'AddressController');
 
 

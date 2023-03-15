@@ -2,16 +2,26 @@
 
 namespace RedJasmine\AddressAdmin\Http\Controllers\Admin\Web;
 
+use Illuminate\Http\Request;
 use RedJasmine\AddressAdmin\Repositories\Address;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Show;
 use Dcat\Admin\Http\Controllers\AdminController;
+use RedJasmine\Region\Facades\Region;
 
 class AddressController extends AdminController
 {
 
     protected $translation = 'red-jasmine.address::address';
+
+    public function children(Request $request)
+    {
+        $provinceID = $request->input('q');
+
+        return Region::children($provinceID)->toArray();
+    }
+
     /**
      * Make a grid builder.
      *
@@ -25,17 +35,18 @@ class AddressController extends AdminController
             $grid->column('owner_uid');
             $grid->column('contacts');
             $grid->column('mobile');
-            $grid->column('country_id');
-            $grid->column('province_id');
-            $grid->column('city_id');
-            $grid->column('district_id');
-            $grid->column('street_id');
+//            $grid->column('country_id');
+//            $grid->column('province_id');
+//            $grid->column('city_id');
+//            $grid->column('district_id');
+//            $grid->column('street_id');
             $grid->column('country');
             $grid->column('province');
             $grid->column('city');
             $grid->column('district');
             $grid->column('street');
             $grid->column('address');
+            $grid->column('full_address');
             $grid->column('tag');
             $grid->column('zip_code');
             $grid->column('is_default');
@@ -101,31 +112,39 @@ class AddressController extends AdminController
     protected function form()
     {
         return Form::make(new Address(), function (Form $form) {
-            $form->display('id');
-            $form->text('owner_type');
-            $form->text('owner_uid');
-            $form->text('contacts');
-            $form->text('mobile');
-            $form->text('country_id');
-            $form->text('province_id');
-            $form->text('city_id');
-            $form->text('district_id');
-            $form->text('street_id');
-            $form->text('country');
-            $form->text('province');
-            $form->text('city');
-            $form->text('district');
-            $form->text('street');
-            $form->text('address');
-            $form->text('tag');
-            $form->text('zip_code');
-            $form->text('is_default');
-            $form->text('sort');
-            $form->text('creator_type');
-            $form->text('creator_uid');
-            $form->text('updater_type');
-            $form->text('updater_uid');
 
+            $form->display('id');
+            $form->text('owner_type')->required()->maxLength(8);
+            $form->text('owner_uid')->required();
+            $form->text('contacts');
+            $form->mobile('mobile');
+            $form->hidden('country_id')->default(0);
+            $form->select('province_id')
+                 ->options(Region::provinces()->pluck('full_name','id')->toArray())
+                ->load('city_id',route('address-admin.api.region.children'),'id','full_name');
+            $form->select('city_id')
+                 ->load('district_id', route('address-admin.api.region.children'),'id','full_name');
+            $form->select('district_id')
+                 ->load('street_id', route('address-admin.api.region.children'),'id','full_name');
+            $form->select('street_id');
+            $form->text('address');
+
+            $form->hidden('country')->default('中国');
+            $form->hidden('province');
+            $form->hidden('city');
+            $form->hidden('district');
+            $form->hidden('street');
+
+            $form->text('tag');
+            $form->text('remarks')->maxLength(100);
+            $form->text('zip_code')->maxLength(6);
+            $form->switch('is_default');
+            $form->number('sort');
+            $form->display('creator_type');
+            $form->display('creator_uid');
+            $form->display('updater_type');
+            $form->display('updater_uid');
+            $form->adminer();
             $form->display('created_at');
             $form->display('updated_at');
         });
