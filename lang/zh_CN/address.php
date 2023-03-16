@@ -30,6 +30,8 @@ return [
         'creator_uid'  => '创建者ID',
         'updater_type' => '更新者类型',
         'updater_uid'  => '更新者UID',
+        'created_at'   => '创建时间',
+        'updated_at'   => '更新时间',
     ],
     'options' => [
     ],

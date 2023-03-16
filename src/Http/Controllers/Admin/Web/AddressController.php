@@ -91,8 +91,8 @@ class AddressController extends AdminController
             $show->field('district');
             $show->field('street');
             $show->field('address');
-            $show->field('tag');
             $show->field('zip_code');
+            $show->field('tag');
             $show->field('is_default');
             $show->field('sort');
             $show->field('creator_type');
@@ -134,10 +134,12 @@ class AddressController extends AdminController
             $form->hidden('city');
             $form->hidden('district');
             $form->hidden('street');
+            $form->text('zip_code')->maxLength(6);
+
 
             $form->text('tag');
             $form->text('remarks')->maxLength(100);
-            $form->text('zip_code')->maxLength(6);
+
             $form->switch('is_default');
             $form->number('sort');
             $form->display('creator_type');
