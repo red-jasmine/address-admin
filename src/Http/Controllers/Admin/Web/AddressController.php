@@ -120,12 +120,12 @@ class AddressController extends AdminController
             $form->mobile('mobile');
             $form->hidden('country_id')->default(0);
             $form->select('province_id')
-                 ->options(Region::provinces()->pluck('full_name','id')->toArray())
-                ->load('city_id',route('address-admin.api.region.children'),'id','full_name');
+                 ->options(Region::provinces()->pluck('name','id')->toArray())
+                ->load('city_id',route('address-admin.api.region.children'),'id','name');
             $form->select('city_id')
-                 ->load('district_id', route('address-admin.api.region.children'),'id','full_name');
+                 ->load('district_id', route('address-admin.api.region.children'),'id','name');
             $form->select('district_id')
-                 ->load('street_id', route('address-admin.api.region.children'),'id','full_name');
+                 ->load('street_id', route('address-admin.api.region.children'),'id','name');
             $form->select('street_id');
             $form->text('address');
 
