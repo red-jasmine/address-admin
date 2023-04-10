@@ -6,7 +6,7 @@ use Dcat\Admin\Form;
 use RedJasmine\Address\Models\Address as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
 use RedJasmine\Admin\Facades\Admin;
-use RedJasmine\Support\Helpers\User;
+use RedJasmine\Support\Helpers\UserObjectBuilder;
 
 class Address extends EloquentRepository
 {
@@ -20,7 +20,14 @@ class Address extends EloquentRepository
     public function store(Form $form)
     {
 
-        $owner  =new User($form->input('owner_type'),$form->input('owner_uid')) ;
+        $user = [
+            'type'     => $form->input('owner_type'),
+            'uid'      => $form->input('owner_uid'),
+            'nickname' => '',
+            'avatar'   => '',
+        ];
+        $owner  = new UserObjectBuilder($user);
+
 
         return \RedJasmine\Address\Facades\Address::createForID($owner,$form->updates(),Admin::user());
 
