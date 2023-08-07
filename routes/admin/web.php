@@ -2,7 +2,7 @@
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use RedJasmine\MallCore\Helpers\DomainRoute;
+use RedJasmine\Support\Services\DomainRoute;
 
 Route::group([
                  'domain'     => DomainRoute::adminDomain(),
