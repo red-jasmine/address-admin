@@ -13,7 +13,8 @@
     "keywords": ["Laravel", "AddressAdmin"],
     "require": {
         "red-jasmine/support": "1.0.x-dev",
-        "red-jasmine/address": "1.0.x-dev"
+        "red-jasmine/address": "1.0.x-dev",
+        "red-jasmine/admin": "1.0.x-dev"
     },
     "require-dev": {
 
