@@ -22,7 +22,7 @@ class Address extends EloquentRepository
 
         $user = [
             'type'     => $form->input('owner_type'),
-            'uid'      => $form->input('owner_uid'),
+            'id'      => $form->input('owner_id'),
             'nickname' => '',
             'avatar'   => '',
         ];

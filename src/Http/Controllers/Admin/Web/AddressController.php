@@ -32,7 +32,7 @@ class AddressController extends AdminController
         return Grid::make(new Address(), function (Grid $grid) {
             $grid->column('id')->sortable();
             $grid->column('owner_type');
-            $grid->column('owner_uid');
+            $grid->column('owner_id');
             $grid->column('contacts');
             $grid->column('mobile');
 //            $grid->column('country_id');
@@ -52,9 +52,9 @@ class AddressController extends AdminController
             $grid->column('is_default');
             $grid->column('sort');
             $grid->column('creator_type');
-            $grid->column('creator_uid');
+            $grid->column('creator_id');
             $grid->column('updater_type');
-            $grid->column('updater_uid');
+            $grid->column('updater_id');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
@@ -77,7 +77,7 @@ class AddressController extends AdminController
         return Show::make($id, new Address(), function (Show $show) {
             $show->field('id');
             $show->field('owner_type');
-            $show->field('owner_uid');
+            $show->field('owner_id');
             $show->field('contacts');
             $show->field('mobile');
             $show->field('country_id');
@@ -96,9 +96,9 @@ class AddressController extends AdminController
             $show->field('is_default');
             $show->field('sort');
             $show->field('creator_type');
-            $show->field('creator_uid');
+            $show->field('creator_id');
             $show->field('updater_type');
-            $show->field('updater_uid');
+            $show->field('updater_id');
             $show->field('created_at');
             $show->field('updated_at');
         });
@@ -115,7 +115,7 @@ class AddressController extends AdminController
 
             $form->display('id');
             $form->text('owner_type')->required()->maxLength(8);
-            $form->text('owner_uid')->required();
+            $form->text('owner_id')->required();
             $form->text('contacts');
             $form->mobile('mobile');
             $form->hidden('country_id')->default(0);
@@ -143,9 +143,9 @@ class AddressController extends AdminController
             $form->switch('is_default');
             $form->number('sort');
             $form->display('creator_type');
-            $form->display('creator_uid');
+            $form->display('creator_id');
             $form->display('updater_type');
-            $form->display('updater_uid');
+            $form->display('updater_id');
             $form->adminer();
             $form->display('created_at');
             $form->display('updated_at');
