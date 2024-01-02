@@ -40,6 +40,7 @@ class AddressController extends AdminController
 //            $grid->column('city_id');
 //            $grid->column('district_id');
 //            $grid->column('street_id');
+            $grid->column('type');
             $grid->column('country');
             $grid->column('province');
             $grid->column('city');
@@ -51,10 +52,10 @@ class AddressController extends AdminController
             $grid->column('zip_code');
             $grid->column('is_default');
             $grid->column('sort');
-            $grid->column('creator_type');
-            $grid->column('creator_id');
-            $grid->column('updater_type');
-            $grid->column('updater_id');
+            // $grid->column('creator_type');
+            // $grid->column('creator_id');
+            // $grid->column('updater_type');
+            // $grid->column('updater_id');
             $grid->column('created_at');
             $grid->column('updated_at')->sortable();
 
@@ -135,11 +136,9 @@ class AddressController extends AdminController
             $form->hidden('district');
             $form->hidden('street');
             $form->text('zip_code')->maxLength(6);
-
-
             $form->text('tag');
             $form->text('remarks')->maxLength(100);
-
+            $form->text('type')->help('可自由定义');
             $form->switch('is_default');
             $form->number('sort');
             $form->display('creator_type');
