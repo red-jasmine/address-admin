@@ -3,11 +3,10 @@
 namespace RedJasmine\AddressAdmin\Repositories;
 
 use Dcat\Admin\Form;
-use RedJasmine\Address\Models\Address as Model;
 use Dcat\Admin\Repositories\EloquentRepository;
-
+use RedJasmine\Address\Models\Address as Model;
 use RedJasmine\Admin\Helpers\Admin\Admin;
-use RedJasmine\Support\Helpers\UserObjectBuilder;
+use RedJasmine\Support\Helpers\User\UserObject;
 
 class Address extends EloquentRepository
 {
@@ -27,7 +26,7 @@ class Address extends EloquentRepository
             'nickname' => '',
             'avatar'   => '',
         ];
-        $owner   = new UserObjectBuilder($user);
+        $owner   = new UserObject($user);
         $service = $this->service();
 
         $service->setOwner($owner);
