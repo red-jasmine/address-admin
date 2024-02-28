@@ -47,7 +47,6 @@ class AddressController extends AdminController
             $grid->column('district');
             $grid->column('street');
             $grid->column('address');
-            $grid->column('full_address');
             $grid->column('tag');
             $grid->column('zip_code');
             $grid->column('is_default');
