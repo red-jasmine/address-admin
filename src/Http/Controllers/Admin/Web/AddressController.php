@@ -118,15 +118,18 @@ class AddressController extends AdminController
             $form->text('owner_id')->required();
             $form->text('contacts');
             $form->mobile('mobile');
-            $form->hidden('country_id')->default(0);
+            $form->select('country_id')
+                 ->options(Region::countries()->pluck('name', 'id')->toArray())
+                 ->default(1)
+                 ->load('province_id', route('address-admin.api.region.children'), 'id', 'name');
             $form->select('province_id')
-                 ->options(Region::provinces()->pluck('name','id')->toArray())
-                ->load('city_id',route('address-admin.api.region.children'),'id','name');
+                 ->load('city_id', route('address-admin.api.region.children'), 'id', 'name');
             $form->select('city_id')
-                 ->load('district_id', route('address-admin.api.region.children'),'id','name');
+                 ->load('district_id', route('address-admin.api.region.children'), 'id', 'name');
             $form->select('district_id')
-                 ->load('street_id', route('address-admin.api.region.children'),'id','name');
+                 ->load('street_id', route('address-admin.api.region.children'), 'id', 'name');
             $form->select('street_id');
+            // TODO 村
             $form->text('address');
 
             $form->hidden('country')->default('中国');
